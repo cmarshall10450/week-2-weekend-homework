@@ -14,8 +14,15 @@ class TestBar < MiniTest::Test
 	end
 
 	def test_open_new_tab
-		@bar.open_new_tab_for(@room)
+		@bar.open_new_tab(@room)
 		assert_equal(1, @bar.tabs.count)
+	end
+
+	def test_close_bar_tab
+		@bar.open_new_tab(@room)
+
+		@bar.close_tab(@room)
+		assert_equal(0, @bar.tabs.count)
 	end
 
 
