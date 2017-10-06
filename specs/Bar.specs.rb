@@ -1,5 +1,6 @@
 require('minitest/autorun')
 require_relative('../Bar')
+require_relative('../BarTab')
 require_relative('../Room')
 
 class TestBar < MiniTest::Test
@@ -25,6 +26,11 @@ class TestBar < MiniTest::Test
 		assert_equal(0, @bar.tabs.count)
 	end
 
+	def test_can_get_tab_for_room_by_name
+		@bar.open_new_tab(@room)
+		tab = @bar.get_tab_by_room_name('Room 101')
 
+		assert(tab)
+	end
 
 end
