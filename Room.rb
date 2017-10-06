@@ -14,4 +14,10 @@ class Room
 		@guests << Guest.new(name)
 	end
 
+	def check_out_guest(name)
+		for guest in @guests
+			@guests.delete(guest) if guest.name == name
+		end
+	end
+
 end
