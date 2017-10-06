@@ -11,4 +11,8 @@ class TestVenue < MiniTest::Test
 		assert(@venue.bar)
 	end
 
+	def test_venue_has_rooms
+		assert_equal([], @venue.rooms)
+	end
+
 end
