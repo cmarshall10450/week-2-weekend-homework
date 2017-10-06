@@ -21,6 +21,10 @@ class TestRoom < MiniTest::Test
 		assert_equal(25, @room.entry_fee)
 	end
 
+	def test_room_has_total_to_spend
+		assert_equal(0, @room.total_to_spend)
+	end
+
 	def test_check_in_guest_to_room
 		guest = Guest.new('Chris', 100)
 

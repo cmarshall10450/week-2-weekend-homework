@@ -1,6 +1,6 @@
 class Room
 
-	attr_reader :songs, :name, :guests, :capacity, :entry_fee
+	attr_reader :songs, :name, :guests, :capacity, :entry_fee, :total_to_spend
 
 	def initialize(name, capacity, entry_fee = 0)
 		@name = name
@@ -8,6 +8,7 @@ class Room
 		@songs = []
 		@capacity = capacity
 		@entry_fee = entry_fee
+		@total_to_spend = 0
 	end
 
 	def check_in_guest(guest)

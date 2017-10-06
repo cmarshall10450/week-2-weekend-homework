@@ -14,7 +14,7 @@ class Bar
 
 	def close_tab(room)
 		tab = get_tab_by_room_name(room)
-		@tabs.delete(tab)
+		@tabs.delete(tab) if tab.amount == 0
 	end
 
 	def add_to_tab(room, amount)
