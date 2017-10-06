@@ -3,12 +3,13 @@ require_relative('./Song')
 
 class Room
 
-	attr_reader :songs, :name, :guests
+	attr_reader :songs, :name, :guests, :capacity
 
-	def initialize(name)
+	def initialize(name, capacity)
 		@name = name
 		@guests = []
 		@songs = []
+		@capacity = capacity
 	end
 
 	def check_in_guest(name)
