@@ -10,5 +10,9 @@ class TestBarTab < MiniTest::Test
 	def test_bar_tab_has_id
 		assert_equal(1, @barTab.id)
 	end
+	
+	def test_bar_tab_has_room
+		assert_equal('Room 101', @barTab.room)
+	end
 
 end

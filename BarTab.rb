@@ -1,10 +1,10 @@
 class BarTab
 
-	attr_reader :id
+	attr_reader :id, :room
 
-	def initialize(id, room_name)
+	def initialize(id, room)
 		@id = id
-		@for_room = room_name
+		@room = room
 		@amount = 0
 	end
 
