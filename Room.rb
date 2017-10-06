@@ -13,7 +13,9 @@ class Room
 	end
 
 	def check_in_guest(name)
-		@guests << Guest.new(name)
+		if @guests.count < @capacity
+			@guests << Guest.new(name)
+		end
 	end
 
 	def check_out_guest(name)

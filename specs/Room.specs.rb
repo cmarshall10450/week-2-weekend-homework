@@ -40,4 +40,13 @@ class TestRoom < MiniTest::Test
 		assert_equal(0, @room.songs.count)
 	end
 
+	def test_guest_is_not_added_if_room_capacity_exceeded
+		10.times {
+			@room.check_in_guest('Chris')
+		}
+
+		@room.check_in_guest('Chris')
+		assert_equal(10, @room.guests.count)
+	end
+
 end
