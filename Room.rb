@@ -15,6 +15,7 @@ class Room
 		if @guests.count < @capacity
 			@guests << guest
 			guest.pay(@entry_fee)
+			@total_to_spend += guest.money
 		end
 	end
 
