@@ -68,4 +68,14 @@ class TestRoom < MiniTest::Test
 		assert_equal(10, @room.guests.count)
 	end
 
+	def test_guest_cheers_when_favourite_song_is_in_room
+		song = Song.new('Burning Ring of Fire', 'Johnny Cash')
+		guest = Guest.new('Chris', 100, song)
+
+		@room.check_in_guest(guest)
+		@room.add_song(song)
+
+		assert_nil(@room.compare_songs)
+	end
+
 end

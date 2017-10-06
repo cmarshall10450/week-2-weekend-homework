@@ -29,10 +29,14 @@ class Room
 		@songs.delete(song)
 	end
 
-	def find_guest_by_name(name)
-		@guests.find { |guest|
-			guest.name == name
+	def compare_songs
+		@songs.each { |song|
+			@guests.each { |guest|
+				puts guest.cheer if guest.favourite_song == song
+			}
 		}
+
+		return
 	end
 
 end
