@@ -29,4 +29,11 @@ class TestRoom < MiniTest::Test
 		assert_equal(1, @room.songs.count)
 	end
 
+	def test_remove_song_from_room
+		@room.add_song('99 Red Balloons', 'Nina')
+
+		@room.remove_song('99 Red Balloons')
+		assert_equal(0, @room.songs.count)
+	end
+
 end
