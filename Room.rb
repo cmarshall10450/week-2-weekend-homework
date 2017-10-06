@@ -2,7 +2,7 @@ class Room
 
 	attr_reader :songs, :name, :guests, :capacity, :entry_fee
 
-	def initialize(name, capacity, entry_fee)
+	def initialize(name, capacity, entry_fee = 0)
 		@name = name
 		@guests = []
 		@songs = []

@@ -15,4 +15,9 @@ class TestVenue < MiniTest::Test
 		assert_equal([], @venue.rooms)
 	end
 
+	def test_can_add_new_room
+		@venue.add_room('Room 101', 10, 25)
+		assert_equal(1, @venue.rooms.count)
+	end
+
 end
