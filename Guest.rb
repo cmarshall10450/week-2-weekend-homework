@@ -12,4 +12,8 @@ class Guest
 		@money -= amount
 	end
 
+	def cheer
+		return 'Whoo!'
+	end
+
 end
