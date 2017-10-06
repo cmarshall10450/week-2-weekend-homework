@@ -1,5 +1,7 @@
 require('minitest/autorun')
 require_relative('../Room')
+require_relative('../Guest')
+require_relative('../Song')
 
 class TestRoom < MiniTest::Test
 
@@ -20,36 +22,49 @@ class TestRoom < MiniTest::Test
 	end
 
 	def test_check_in_guest_to_room
-		@room.check_in_guest('Chris')
+		guest = Guest.new('Chris', 100)
+
+		@room.check_in_guest(guest)
 		assert_equal(1, @room.guests.count)
 	end
 
+	def test_guest_pays_entry_fee_when_checked_in
+		guest = Guest.new('Chris', 100)
+		@room.check_in_guest(guest)
+
+		assert_equal(75, guest.money)
+	end
+
 	def test_check_out_guest_from_room
-		@room.check_in_guest('Chris')
+		guest = Guest.new('Chris', 100)
+		@room.check_in_guest(guest)
 		
-		@room.check_out_guest('Chris')
+		@room.check_out_guest(guest)
 		assert_equal(0, @room.guests.count)
 	end
 
 	def test_add_song_to_room
-		@room.add_song('99 Red Balloons', 'Nina')
+		song = Song.new('99 Red Balloons', 'Nina')
+		@room.add_song(song)
 
 		assert_equal(1, @room.songs.count)
 	end
 
 	def test_remove_song_from_room
-		@room.add_song('99 Red Balloons', 'Nina')
+		song = Song.new('99 Red Balloons', 'Nina')
+		@room.add_song(song)
 
-		@room.remove_song('99 Red Balloons')
+		@room.remove_song(song)
 		assert_equal(0, @room.songs.count)
 	end
 
 	def test_guest_is_not_added_if_room_capacity_exceeded
+		guest = Guest.new('Chris', 100)
 		10.times {
-			@room.check_in_guest('Chris')
+			@room.check_in_guest(guest)
 		}
 
-		@room.check_in_guest('Chris')
+		@room.check_in_guest(guest)
 		assert_equal(10, @room.guests.count)
 	end
 

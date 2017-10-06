@@ -1,6 +1,3 @@
-require_relative('./Guest')
-require_relative('./Song')
-
 class Room
 
 	attr_reader :songs, :name, :guests, :capacity, :entry_fee
@@ -13,26 +10,29 @@ class Room
 		@entry_fee = entry_fee
 	end
 
-	def check_in_guest(name)
+	def check_in_guest(guest)
 		if @guests.count < @capacity
-			@guests << Guest.new(name)
+			@guests << guest
+			guest.pay(@entry_fee)
 		end
 	end
 
-	def check_out_guest(name)
-		for guest in @guests
-			@guests.delete(guest) if guest.name == name
-		end
+	def check_out_guest(guest)
+		@guests.delete(guest)
 	end
 
-	def add_song(title, artist)
-		@songs << Song.new(title, artist)
+	def add_song(song)
+		@songs << song
 	end
 
-	def remove_song(title)
-		for song in @songs
-			@songs.delete(song) if song.title== title
-		end
+	def remove_song(song)
+		@songs.delete(song)
+	end
+
+	def find_guest_by_name(name)
+		@guests.find { |guest|
+			guest.name == name
+		}
 	end
 
 end
