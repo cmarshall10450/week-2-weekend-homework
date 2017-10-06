@@ -15,22 +15,30 @@ class TestBar < MiniTest::Test
 	end
 
 	def test_open_new_tab
-		@bar.open_new_tab(@room)
+		@bar.open_new_tab('Room 101')
 		assert_equal(1, @bar.tabs.count)
 	end
 
 	def test_close_bar_tab
-		@bar.open_new_tab(@room)
+		@bar.open_new_tab('Room 101')
 
-		@bar.close_tab(@room)
+		@bar.close_tab('Room 101')
 		assert_equal(0, @bar.tabs.count)
 	end
 
 	def test_can_get_tab_for_room_by_name
-		@bar.open_new_tab(@room)
+		@bar.open_new_tab('Room 101')
 		tab = @bar.get_tab_by_room_name('Room 101')
 
 		assert(tab)
+	end
+
+	def test_can_add_amount_to_bar_tab_by_room_name
+		@bar.open_new_tab('Room 101')
+		@bar.add_to_tab('Room 101', 10)
+		amount = @bar.get_tab_by_room_name('Room 101').amount
+
+		assert_equal(10, amount)
 	end
 
 end
