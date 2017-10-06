@@ -19,4 +19,9 @@ class TestBarTab < MiniTest::Test
 		assert_equal(0, @bar_tab.amount)
 	end
 
+	def test_can_add_amount_to_bar_tab
+		@bar_tab.add(10)
+		assert_equal(10, @bar_tab.amount)
+	end
+
 end

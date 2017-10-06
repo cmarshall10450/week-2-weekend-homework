@@ -8,4 +8,8 @@ class BarTab
 		@amount = 0
 	end
 
+	def add(amount)
+		@amount += amount
+	end
+
 end
