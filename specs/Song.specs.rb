@@ -13,4 +13,10 @@ class TestSong < MiniTest::Test
 		assert_equal(expected, result)
 	end
 
+	def test_song_has_artist
+		expected = 'Nina'
+		result = @song.artist
+		assert_equal(expected, result)
+	end
+
 end
