@@ -18,4 +18,9 @@ class Venue
 		@bar.open_new_tab(room_name)
 	end
 
+	def create_room(room_name, capacity, entry_fee = 0)
+		add_room(room_name, capacity, entry_fee)
+		create_bar_tab(room_name)
+	end
+
 end
