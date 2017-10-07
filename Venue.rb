@@ -3,24 +3,30 @@ require_relative('Room')
 
 class Venue
 
-	attr_reader :bar, :rooms
+	attr_reader :bar, :rooms, :revenue
 
-	def initialize()
-	  @bar = Bar.new()
+	def initialize
 		@rooms = []
+		@revenue = 0
 	end
 
 	def add_room(room_name, capacity, entry_fee = 0)
 		@rooms << Room.new(room_name, capacity, entry_fee)
 	end
 
-	def create_bar_tab(room_name)
-		@bar.open_new_tab(room_name)
+	def collect_payment_from_room(room)
+		room.guests.each { |guest|
+			tab = room.bar.get_tab_for_guest(guest)
+
+			guest.pay(tab.amount)
+			@revenue += tab.amount
+		}
 	end
 
-	def create_room(room_name, capacity, entry_fee = 0)
-		add_room(room_name, capacity, entry_fee)
-		create_bar_tab(room_name)
+	def collect_payment
+		@rooms.each { |room|
+			collect_payment_from_room(room)
+		}
 	end
 
 end

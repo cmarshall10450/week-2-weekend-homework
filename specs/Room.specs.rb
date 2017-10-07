@@ -6,6 +6,7 @@ require_relative('../Song')
 class TestRoom < MiniTest::Test
 
   def setup
+		@guest = Guest.new('Chris', 100)
     @room = Room.new('Room 101', 10, 25)
 	end
 
@@ -25,33 +26,46 @@ class TestRoom < MiniTest::Test
 		assert_equal(0, @room.total_to_spend)
 	end
 
+	def test_room_has_bar
+		assert(@room.bar)
+	end
+
 	def test_room_total_to_spend_is_increased_when_guest_checked_in
-		guest = Guest.new('Chris', 100)
-		@room.check_in_guest(guest)
+
+		@room.check_in_guest(@guest)
 
 		assert_equal(75, @room.total_to_spend)
 	end
 
 	def test_check_in_guest_to_room
-		guest = Guest.new('Chris', 100)
-
-		@room.check_in_guest(guest)
+		@room.check_in_guest(@guest)
 		assert_equal(1, @room.guests.count)
 	end
 
 	def test_guest_pays_entry_fee_when_checked_in
-		guest = Guest.new('Chris', 100)
-		@room.check_in_guest(guest)
+		@room.check_in_guest(@guest)
 
-		assert_equal(75, guest.money)
+		assert_equal(75, @guest.money)
 	end
 
 	def test_check_out_guest_from_room
-		guest = Guest.new('Chris', 100)
-		@room.check_in_guest(guest)
+		@room.check_in_guest(@guest)
 		
-		@room.check_out_guest(guest)
+		@room.check_out_guest(@guest)
 		assert_equal(0, @room.guests.count)
+	end
+
+	def test_can_open_new_bar_tab_when_guest_is_checked_in
+		@room.check_in_guest(@guest)
+
+		assert_equal(1, @room.bar.tabs.count)
+	end
+
+	def test_bar_tab_is_closed_when_guest_is_check_out_of_room
+		@room.check_in_guest(@guest)
+
+		@room.check_out_guest(@guest)
+		assert_equal(0, @room.bar.tabs.count)
 	end
 
 	def test_add_song_to_room
@@ -70,12 +84,11 @@ class TestRoom < MiniTest::Test
 	end
 
 	def test_guest_is_not_added_if_room_capacity_exceeded
-		guest = Guest.new('Chris', 100)
 		10.times {
-			@room.check_in_guest(guest)
+			@room.check_in_guest(@guest)
 		}
 
-		@room.check_in_guest(guest)
+		@room.check_in_guest(@guest)
 		assert_equal(10, @room.guests.count)
 	end
 

@@ -1,14 +1,16 @@
 require('minitest/autorun')
 require_relative('../BarTab')
+require_relative('../Guest')
 
 class TestBarTab < MiniTest::Test
     
   def setup
-    @bar_tab = BarTab.new('Room 101')
+		@guest = Guest.new('Chris', 100)
+    @bar_tab = BarTab.new(@guest)
 	end
 	
-	def test_bar_tab_has_room
-		assert_equal('Room 101', @bar_tab.room)
+	def test_bar_tab_has_guest
+		assert_equal(@guest, @bar_tab.guest)
 	end
 
 	def test_bar_tab_has_amount
