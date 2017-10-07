@@ -20,4 +20,9 @@ class TestVenue < MiniTest::Test
 		assert_equal(1, @venue.rooms.count)
 	end
 
+	def test_can_add_bar_tab_to_bar
+		@venue.create_bar_tab('Room 101')
+		assert_equal(1, @venue.bar.tabs.count)
+	end
+
 end
