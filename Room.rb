@@ -40,7 +40,7 @@ class Room
 	def compare_songs
 		@songs.each { |song|
 			@guests.each { |guest|
-				puts guest.cheer if guest.favourite_song == song
+				guest.cheer if guest.favourite_song == song
 			}
 		}
 

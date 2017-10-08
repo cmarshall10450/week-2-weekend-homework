@@ -10,8 +10,17 @@ class Venue
 		@revenue = 0
 	end
 
-	def add_room(room_name, capacity, entry_fee = 0)
+	def open_room(room_name, capacity, entry_fee = 0)
 		@rooms << Room.new(room_name, capacity, entry_fee)
+	end
+
+	def close_room(room_name)
+		room = @rooms.find { |room|
+			room.name == room_name
+		}
+
+		collect_payment_from_room(room)
+		@rooms.delete(room)
 	end
 
 	def collect_payment_from_room(room)
